@@ -8,7 +8,7 @@ _____
 
 ### 安装
 ```bash
-pip install qq-botpy python-Levenshtein
+pip install qq-botpy python-Levenshtein fuzzywuzzy
 ```
 
 ```bash
@@ -20,4 +20,5 @@ git clone https://github.com/F145H-F145H/lain.git
 python3 robot.py
 ```
 
-在QQ中艾特 使用 `@qqbot /会展 地名`进行查询
+在QQ中艾特 使用 `@qqbot /近期展会 地名`进行查询近期某行政地区的展会
+在QQ中艾特 使用 `@qqbot /展会详情 会展名`进行查询近期某展会
