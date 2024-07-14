@@ -5,8 +5,8 @@ import botpy
 from botpy import logging
 from botpy.ext.cog_yaml import read
 from botpy.message import GroupMessage, Message
-from getExihibition import GetInfo, GetExtraInfo
-
+from py.getExihibition import GetExtraInfo
+from py.GetUpcomingExhibitions import GetInfo
 test_config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 
 _log = logging.get_logger()
@@ -17,13 +17,13 @@ class MyClient(botpy.Client):
 
     async def on_group_at_message_create(self, message: GroupMessage):
         msg = message.content.split()
-        if msg[0] == "/会展":
+        if msg[0] == "/近期展会":
             if len(msg) < 2:
                 messageResult = await message._api.post_group_message(
                 group_openid=message.group_openid,
                 msg_type=0, 
                 msg_id=message.id,
-                content=f"使用方式 @我 /会展 会展城市")
+                content=f"使用方式 @我 /近期展会 展会城市")
             else:
                 messageResult = await message._api.post_group_message(
                     group_openid=message.group_openid,
@@ -32,19 +32,19 @@ class MyClient(botpy.Client):
                     content=f"{GetInfo(msg[1])}")
             _log.info(messageResult)
 
-        elif msg[0] == "/会展详情": # doing
-            if len(msg) < 2:
+        elif msg[0] == "/展会详情":
+            if len(msg) == 1:
                 messageResult = await message._api.post_group_message(
                 group_openid=message.group_openid,
                 msg_type=0, 
                 msg_id=message.id,
-                content=f"使用方式 @我 /会展详情 会展名或id")
+                content=f"使用方式 @我 /展会详情 会展名关键词")
             else:
                 messageResult = await message._api.post_group_message(
                     group_openid=message.group_openid,
                     msg_type=0, 
                     msg_id=message.id,
-                    content=f"{GetExtraInfo(msg()[1])}")
+                    content=f"{GetExtraInfo(msg[1])}")
             _log.info(messageResult)
 
 if __name__ == "__main__":
